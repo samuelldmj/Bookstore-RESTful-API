@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -11,8 +11,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class AuthController extends Controller
 {
-    //
-
     use HasApiTokens;
     public function register(Request $request){
 
@@ -38,7 +36,6 @@ class AuthController extends Controller
             'role' => $request->role
         ]);
 
-        //the createToken method is used to generate a token that would be used to authenticate the user later in the api.php
         return response()->json(['token' => $user->createToken('auth_token')->plainTextToken, 'message' => 'User created Successfully'], 201); 
 
     }
@@ -60,7 +57,6 @@ class AuthController extends Controller
 
 
         //find the user
-
         $user = User::where('email', $request->email)->first();
 
         //if the user does not exist, return an error response.
